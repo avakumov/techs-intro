@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "react-demos": "yarn workspace react-demos start"
+  },
+  "workspaces": [
+    "techs/*"
+  ]
+}
