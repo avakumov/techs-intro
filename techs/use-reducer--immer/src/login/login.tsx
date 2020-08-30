@@ -1,6 +1,5 @@
-import React, { useReducer } from "react";
-import produce from "immer";
-import {useImmerReducer} from 'use-immer'
+import React from "react";
+import {useImmerReducer} from 'use-immer';
 import { login } from "../utils/utils";
 
 function loginReducer(draft: any, action: any) {
