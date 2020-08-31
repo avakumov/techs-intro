@@ -1,4 +1,4 @@
-import React, {  useReducer } from "react";
+import React, { useReducer } from "react";
 import { login } from "../utils/utils";
 
 const initState: LoginState = {
@@ -7,20 +7,21 @@ const initState: LoginState = {
   isLoading: false,
   error: "",
   isLoggedIn: false,
-  variant: 'login'
+  variant: "login",
 };
 
 interface LoginState {
-  username: string,
-  password: string,
-  isLoading: boolean,
-  error: string,
-  isLoggedIn: boolean,
-  variant: 'login' | 'forgetPassword'
+  username: string;
+  password: string;
+  isLoading: boolean;
+  error: string;
+  isLoggedIn: boolean;
+  variant: "login" | "forgetPassword";
 }
 
-
-type LoginAction = | { type: 'login' | 'success' | 'error' | 'logout'} | { type: 'field', field: string, value: string }
+type LoginAction =
+  | { type: "login" | "success" | "error" | "logout" }
+  | { type: "field"; field: string; value: string };
 
 function loginReducer(state: LoginState, action: LoginAction) {
   switch (action.type) {
@@ -55,20 +56,17 @@ function loginReducer(state: LoginState, action: LoginAction) {
         username: "",
       };
     }
-    case "field":
-      {
-        return {
-          ...state,
-          [action.field]: action.value,
-        };
-      }
-      default: {
-        return state
-      }
+    case "field": {
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    }
+    default: {
+      return state;
+    }
   }
-  
 }
-
 
 function Login() {
   const [state, dispatch] = useReducer(loginReducer, initState);

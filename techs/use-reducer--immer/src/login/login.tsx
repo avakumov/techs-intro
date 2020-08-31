@@ -1,8 +1,30 @@
 import React from "react";
-import {useImmerReducer} from 'use-immer';
+import { useImmerReducer } from "use-immer";
 import { login } from "../utils/utils";
 
-function loginReducer(draft: any, action: any) {
+const initState: LoginState = {
+  username: "",
+  password: "",
+  isLoading: false,
+  error: "",
+  isLoggedIn: false,
+  variant: "login",
+};
+
+interface LoginState {
+  username: string;
+  password: string;
+  isLoading: boolean;
+  error: string;
+  isLoggedIn: boolean;
+  variant: "login" | "forgetPassword";
+}
+
+type LoginAction =
+  | { type: "login" | "success" | "error" | "logout" }
+  | { type: "field"; field: "username" | "password"; value: string };
+
+function loginReducer(draft: LoginState, action: LoginAction) {
   switch (action.type) {
     case "login": {
       draft.error = "";
@@ -35,15 +57,6 @@ function loginReducer(draft: any, action: any) {
       return;
   }
 }
-
-const initState = {
-  username: "",
-  password: "",
-  isLoading: false,
-  error: "",
-  isLoggedIn: false,
-};
-
 
 function Login() {
   const [state, dispatch] = useImmerReducer(loginReducer, initState);
