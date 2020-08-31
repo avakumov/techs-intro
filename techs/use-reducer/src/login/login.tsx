@@ -1,7 +1,28 @@
 import React, {  useReducer } from "react";
 import { login } from "../utils/utils";
 
-function loginReducer(state: any, action: any) {
+const initState: LoginState = {
+  username: "",
+  password: "",
+  isLoading: false,
+  error: "",
+  isLoggedIn: false,
+  variant: 'login'
+};
+
+interface LoginState {
+  username: string,
+  password: string,
+  isLoading: boolean,
+  error: string,
+  isLoggedIn: boolean,
+  variant: 'login' | 'forgetPassword'
+}
+
+
+type LoginAction = | { type: 'login' | 'success' | 'error' | 'logout'} | { type: 'field', field: string, value: string }
+
+function loginReducer(state: LoginState, action: LoginAction) {
   switch (action.type) {
     case "login": {
       return {
@@ -41,17 +62,13 @@ function loginReducer(state: any, action: any) {
           [action.field]: action.value,
         };
       }
-      break;
+      default: {
+        return state
+      }
   }
-  return state;
+  
 }
-const initState = {
-  username: "",
-  password: "",
-  isLoading: false,
-  error: "",
-  isLoggedIn: false,
-};
+
 
 function Login() {
   const [state, dispatch] = useReducer(loginReducer, initState);

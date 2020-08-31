@@ -1,5 +1,5 @@
 {
-  "name": "use-reducer--context",
+  "name": "use-reducer--immer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
